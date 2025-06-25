@@ -1,0 +1,170 @@
+/* Import Google Fonts for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;500;600&display=swap');
+
+:root {
+  /* Color Palette */
+  --primary-color: #F36886;
+  --primary-light: #FFA5B8;
+  --primary-dark: #D64D6F;
+  --secondary-color: #FFFFFF;
+  --secondary-light: #FFFFFF;
+  --background-color: #FFFFFF;
+  --text-color: #FFFFFF;
+  --text-dark: #FFFFFF;
+  --hover-color: #E04A6C;
+  --shadow-color: rgba(214, 77, 111, 0.15);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+  --form-bg-color: #F9F9F9;
+  --form-text-color: #555555;
+  --error-color: #e53e3e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.login-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--background-color) 100%);
+  padding: 20px;
+  font-family: 'Roboto', 'Poppins', 'Montserrat', sans-serif;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--secondary-color);
+  padding: 32px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 16px var(--shadow-color);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.login-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.login-form h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--form-text-color);
+  margin-bottom: 8px;
+  transition: color var(--transition-speed) ease;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: var(--form-text-color);
+  background-color: var(--form-bg-color);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--shadow-color);
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--form-text-color);
+  font-size: 16px;
+  transition: color var(--transition-speed) ease;
+}
+
+.password-toggle:hover {
+  color: var(--primary-color);
+}
+
+.form-error {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: var(--error-color);
+  margin-top: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.form-button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.form-button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 24px;
+    max-width: 90%;
+  }
+
+  .login-form h2 {
+    font-size: 24px;
+  }
+
+  .form-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .password-toggle {
+    font-size: 14px;
+  }
+}
