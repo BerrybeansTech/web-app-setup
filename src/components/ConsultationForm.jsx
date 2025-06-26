@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
-import { FaPrint, FaDownload, FaRedo, FaInfoCircle } from 'react-icons/fa';
+import { FaPrint, FaDownload, FaRedo, FaInfoCircle, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import * as XLSX from 'xlsx';
 import './consultationForm.css';
+import Logo from '../assets/images/logo.png'; // Adjust the path as necessary
 
 const ConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -203,18 +205,19 @@ const ConsultationForm = () => {
   };
 
   const handleDownload = () => {
-    const signatureData = signatureRef.current.isEmpty()
-      ? ''
-      : signatureRef.current.toDataURL();
-    const finalData = { ...formData, clientSignature: signatureData };
-    const element = document.createElement('a');
-    const text = JSON.stringify(finalData, null, 2);
-    const blob = new Blob([text], { type: 'text/plain' });
-    element.href = URL.createObjectURL(blob);
-    element.download = `eloraa-consultation-${formData.clientId || 'form'}.txt`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    const ws = XLSX.utils.json_to_sheet([formData]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'ConsultationData');
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(data);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `consultation_${formData.clientId || 'form'}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
   };
 
   return (
@@ -223,39 +226,27 @@ const ConsultationForm = () => {
         <div className="progress-fill" style={{ width: `${progress}%` }}></div>
       </div>
       <div className="form-header">
-        <h1 className="clinic-name">ELORAA CLINIQ</h1>
-        <p className="clinic-specialty">SKIN - HAIR - SLIMMING - LASER</p>
-        <div></div>
-        
-        <p className="clinic-address">
-          110, Arcot Road, Opposite Jains Swarnokamol Apartments,<br />
-          Saligramam, Chennai - 600093<br />
-          +91 76049 89898 | +91 44 4215 9898
-        </p>
-        
-        <hr className="header-divider" />
+        <img src={Logo} alt="Eloraa Clinic Logo" className="clinic-logo" draggable="false" />
+        <div className="clinic-address">
+          <div className="address-item">
+            <FaMapMarkerAlt className="address-icon" />
+            <span>110, Arcot Road, Opposite Jains Swarnokamol Apartments,
+               Saligramam, Chennai - 600093</span>
+          </div>
+          <div className="address-item">
+            <FaPhone className="address-icon" />
+            <span>+91 76049 89898 | +91 44 4215 9898</span>
+          </div>
+        </div>
       </div>
-      
-
       <h2 className="form-title">CONSULTATION SHEET</h2>
-
-      <div className="action-buttons">
-        <button onClick={handlePrint} className="print-button">
-          <FaPrint /> Print
-        </button>
-        <button onClick={handleDownload} className="download-button">
-          <FaDownload /> Download
-        </button>
-        <button onClick={handleReset} className="reset-button">
-          <FaRedo /> Reset
-        </button>
-      </div>
-
       <form onSubmit={handleSubmit}>
         <div className="form-section">
           <div className="form-row">
             <div className="form-group">
-              <label className="form-label">Consulting Doctor: {errors.consultingDoctor && <span className="form-error">{errors.consultingDoctor}</span>}</label>
+              <label className="form-label">
+                Consulting Doctor: {errors.consultingDoctor && <span className="form-error">{errors.consultingDoctor}</span>}
+              </label>
               <input
                 type="text"
                 name="consultingDoctor"
@@ -266,7 +257,9 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Date: {errors.date && <span className="form-error">{errors.date}</span>}</label>
+              <label className="form-label">
+                Date: {errors.date && <span className="form-error">{errors.date}</span>}
+              </label>
               <input
                 type="date"
                 name="date"
@@ -276,7 +269,9 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Client ID: {errors.clientId && <span className="form-error">{errors.clientId}</span>}</label>
+              <label className="form-label">
+                Client ID: {errors.clientId && <span className="form-error">{errors.clientId}</span>}
+              </label>
               <input
                 type="text"
                 name="clientId"
@@ -295,7 +290,9 @@ const ConsultationForm = () => {
           </p>
           <div className="form-row">
             <div className="form-group">
-              <label className="form-label">Name: {errors.name && <span className="form-error">{errors.name}</span>}</label>
+              <label className="form-label">
+                Name: {errors.name && <span className="form-error">{errors.name}</span>}
+              </label>
               <input
                 type="text"
                 name="name"
@@ -306,7 +303,9 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Age: {errors.age && <span className="form-error">{errors.age}</span>}</label>
+              <label className="form-label">
+                Age: {errors.age && <span className="form-error">{errors.age}</span>}
+              </label>
               <input
                 type="number"
                 name="age"
@@ -317,7 +316,9 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">D.O.B: {errors.dob && <span className="form-error">{errors.dob}</span>}</label>
+              <label className="form-label">
+                D.O.B: {errors.dob && <span className="form-error">{errors.dob}</span>}
+              </label>
               <input
                 type="date"
                 name="dob"
@@ -371,7 +372,9 @@ const ConsultationForm = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label className="form-label">Mobile: {errors.mobile && <span className="form-error">{errors.mobile}</span>}</label>
+              <label className="form-label">
+                Mobile: {errors.mobile && <span className="form-error">{errors.mobile}</span>}
+              </label>
               <input
                 type="text"
                 name="mobile"
@@ -382,7 +385,9 @@ const ConsultationForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Email: {errors.email && <span className="form-error">{errors.email}</span>}</label>
+              <label className="form-label">
+                Email: {errors.email && <span className="form-error">{errors.email}</span>}
+              </label>
               <input
                 type="email"
                 name="email"
@@ -674,13 +679,21 @@ const ConsultationForm = () => {
         </div>
 
         <div className="form-actions">
-          <button type="submit" className="submit-button" disabled={isSubmitting}>
+          <button type="submit" className="submit-button" disabled={isSubmitting} aria-label="Save Consultation">
             {isSubmitting && <span className="loading-spinner"></span>}
             {isSubmitting ? 'Saving...' : 'Save Consultation'}
           </button>
-          <button type="button" className="reset-button" onClick={handleReset}>
-            Reset Form
-          </button>
+          <div className="action-buttons">
+            <button onClick={handlePrint} className="print-button" aria-label="Print Form">
+              <FaPrint /> Print
+            </button>
+            <button onClick={handleDownload} className="download-button" aria-label="Download Excel">
+              <FaDownload /> Download Excel
+            </button>
+            <button onClick={handleReset} className="reset-button" aria-label="Reset Form">
+              <FaRedo /> Reset
+            </button>
+          </div>
         </div>
       </form>
     </div>

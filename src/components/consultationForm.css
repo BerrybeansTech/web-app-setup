@@ -1,19 +1,17 @@
-/* Import enhanced Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;500;600&display=swap');
 
 :root {
-  /* Color Palette */
   --primary-color: #F36886;
   --primary-light: #FFA5B8;
   --primary-dark: #D64D6F;
   --secondary-color: #FFFFFF;
-  --secondary-light: #FFFFFF;
+  --secondary-light: #F9F9F9;
   --background-color: #FFFFFF;
-  --text-color: #FFFFFF;
-  --text-dark: #FFFFFF;
+  --text-color: #333333;
+  --text-dark: #1A1A1A;
   --hover-color: #E04A6C;
   --shadow-color: rgba(214, 77, 111, 0.15);
-  --border-color: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
   --transition-speed: 0.3s;
   --section-bg-color: #F9F9F9;
@@ -30,8 +28,7 @@
 
 .consultation-form-container {
   font-family: 'Roboto', 'Poppins', 'Montserrat', sans-serif;
-  max-width: 100%; /* Full width *//* Adjusted from A4 for digital screens */
-  min-height: auto; /* Flexible height for digital use */
+  max-width: 100%;
   margin: 20px auto;
   padding: 24px;
   background-color: var(--background-color);
@@ -60,43 +57,38 @@
 }
 
 .form-header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 24px;
   animation: fadeIn 0.5s ease-in;
 }
 
-.clinic-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-
-.clinic-specialty {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  color: var(--form-text-color);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+.clinic-logo {
+  max-width: 200px; /* Increased logo size */
+  height: auto;
 }
 
 .clinic-address {
   font-family: 'Roboto', sans-serif;
-  font-size: 13px;
+  font-size: 14px; /* Slightly larger for readability */
   color: var(--form-text-color);
   line-height: 1.6;
-  margin-bottom: 16px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.header-divider {
-  border: none;
-  border-top: 3px solid var(--primary-dark);
-  margin: 16px 0;
-  transition: border-color var(--transition-speed) ease;
+.address-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.address-icon {
+  font-size: 16px;
+  color: var(--primary-color);
 }
 
 .form-title {
@@ -107,43 +99,6 @@
   text-align: center;
   margin-bottom: 24px;
   text-transform: uppercase;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.print-button, .download-button, .reset-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
-}
-
-.reset-button {
-  background-color: #6b7280;
-}
-
-.print-button:hover, .download-button:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
-}
-
-.reset-button:hover {
-  background-color: #4b5563;
-  transform: translateY(-2px);
 }
 
 .form-section {
@@ -227,7 +182,8 @@
   opacity: 1;
 }
 
-.form-input, .textarea {
+.form-input,
+.textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border-color);
@@ -239,7 +195,8 @@
   transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
-.form-input:focus, .textarea:focus {
+.form-input:focus,
+.textarea:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--shadow-color);
@@ -264,14 +221,16 @@
   height: 100%;
 }
 
-.radio-group, .checkbox-group {
+.radio-group,
+.checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 8px;
 }
 
-.radio-group label, .checkbox-group label {
+.radio-group label,
+.checkbox-group label {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -328,32 +287,64 @@
 .form-actions {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 16px;
   margin-top: 32px;
+  flex-wrap: wrap;
 }
 
-.submit-button, .reset-button {
-  padding: 14px 40px;
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.submit-button,
+.print-button,
+.download-button,
+.reset-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
   border-radius: var(--border-radius);
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
-  position: relative;
+  min-width: 120px;
+  justify-content: center;
 }
 
-.submit-button:hover, .reset-button:hover {
+.reset-button {
+  background-color: #6b7280;
+}
+
+.submit-button:hover,
+.print-button:hover,
+.download-button:hover {
   background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+.reset-button:hover {
+  background-color: #4b5563;
   transform: translateY(-2px);
 }
 
 .submit-button:disabled {
   background-color: #d1d5db;
   cursor: not-allowed;
+  transform: none;
+}
+
+.action-buttons svg {
+  font-size: 16px;
 }
 
 .loading-spinner {
@@ -370,26 +361,40 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-/* Print styles */
 @media print {
   body * {
     visibility: hidden;
   }
-  .consultation-form-container, .consultation-form-container * {
+  .consultation-form-container,
+  .consultation-form-container * {
     visibility: visible;
   }
   .consultation-form-container {
@@ -403,12 +408,13 @@
     box-shadow: none;
     margin: 0;
   }
-  .action-buttons, .reset-button, .progress-bar {
+  .action-buttons,
+  .submit-button,
+  .progress-bar {
     display: none;
   }
 }
 
-/* Responsive styles */
 @media (max-width: 1024px) {
   .consultation-form-container {
     max-width: 90%;
@@ -416,6 +422,9 @@
   }
   .form-row {
     grid-template-columns: 1fr;
+  }
+  .clinic-logo {
+    max-width: 180px;
   }
 }
 
@@ -436,11 +445,31 @@
   .form-section {
     padding: 16px;
   }
-  .form-input, .textarea {
+  .form-input,
+  .textarea {
     font-size: 13px;
   }
-  .submit-button, .reset-button {
-    padding: 12px 30px;
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .submit-button,
+  .print-button,
+  .download-button,
+  .reset-button {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+  .clinic-address {
+    font-size: 13px;
+  }
+  .address-icon {
     font-size: 14px;
   }
 }
@@ -448,6 +477,7 @@
 @media (max-width: 480px) {
   .consultation-form-container {
     padding: 12px;
+    margin: 8px;
   }
   .form-row {
     gap: 12px;
@@ -455,12 +485,34 @@
   .checkbox-grid {
     grid-template-columns: 1fr;
   }
-  .action-buttons {
-    justify-content: center;
-    flex-wrap: wrap;
+  .form-actions {
+    gap: 10px;
   }
-  .print-button, .download-button, .reset-button {
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .submit-button,
+  .print-button,
+  .download-button,
+  .reset-button {
+    width: 100%;
+    padding: 10px;
     font-size: 12px;
-    padding: 8px 16px;
+  }
+  .form-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .clinic-address {
+    text-align: center;
+    font-size: 12px;
+  }
+  .clinic-logo {
+    max-width: 150px;
+  }
+  .signature-container {
+    max-width: 100%;
   }
 }

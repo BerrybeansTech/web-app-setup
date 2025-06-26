@@ -15,18 +15,8 @@ const Sidebar = ({ isOpen }) => {
             <span className="link-text">Dashboard</span>
           </NavLink>
         </li>
-        <li className="sidebar-item">
-          <NavLink to="/clients" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            <i className="fas fa-users link-icon"></i>
-            <span className="link-text">Clients</span>
-          </NavLink>
-        </li>
-        <li className="sidebar-item">
-          <NavLink to="/add-client" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            <i className="fas fa-user-plus link-icon"></i>
-            <span className="link-text">Add Client</span>
-          </NavLink>
-        </li>
+
+
         <li className="sidebar-item">
           <NavLink to="/reportPage" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             <i className="fas fa-chart-line link-icon"></i>
@@ -34,7 +24,7 @@ const Sidebar = ({ isOpen }) => {
           </NavLink>
         </li>
         <li className="sidebar-item">
-          <NavLink to="/consultation" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+          <NavLink to="/" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             <i className="fas fa-file-alt link-icon"></i>
             <span className="link-text">Consultation Form</span>
           </NavLink>

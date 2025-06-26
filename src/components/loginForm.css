@@ -168,3 +168,23 @@
     font-size: 14px;
   }
 }
+.back-button-container {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.form-back-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color var(--transition-speed) ease;
+}
+
+.form-back-button:hover {
+  color: var(--hover-color);
+}

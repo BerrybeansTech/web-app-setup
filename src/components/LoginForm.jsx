@@ -17,13 +17,12 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    setError(''); // Clear error when user types
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!credentials.email || !credentials.password) {
       setError('Please fill in all fields');
       return;
@@ -36,7 +35,7 @@ const LoginForm = () => {
 
     setLoading(true);
     setError('');
-    
+
     try {
       const result = await login(credentials);
       if (result.success) {
@@ -55,6 +54,7 @@ const LoginForm = () => {
     <div className="login-form-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Admin Login</h2>
+        
         <div className="form-group">
           <label htmlFor="email" className="form-label">Email</label>
           <input
@@ -69,6 +69,7 @@ const LoginForm = () => {
             disabled={loading}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="password" className="form-label">Password</label>
           <div className="password-container">
@@ -94,7 +95,9 @@ const LoginForm = () => {
             </button>
           </div>
         </div>
+
         {error && <p className="form-error">{error}</p>}
+
         <button 
           type="submit" 
           className="form-button"
@@ -102,6 +105,17 @@ const LoginForm = () => {
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>
+
+    <div className="back-button-container">
+  <button 
+    type="button" 
+    className="form-back-button"
+    onClick={() => navigate('/')}
+  >
+    Back
+  </button>
+</div>
+
       </form>
     </div>
   );
