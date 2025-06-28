@@ -17,35 +17,48 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" replace />;
 };
 
-const AppLayout = ({ children, isSidebarOpen, toggleSidebar }) => (
+const AppLayout = ({ children, isSidebarOpen, toggleSidebar, showSidebar = true }) => (
   <div className="app">
     <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
     <div className="app-container">
-      <Sidebar isOpen={isSidebarOpen} />
-      <main className={`main-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+      {showSidebar && <Sidebar isOpen={isSidebarOpen} />}
+      <main className={`main-content ${isSidebarOpen && showSidebar ? 'sidebar-open' : ''}`}>
         {children}
       </main>
     </div>
-    <div
-      className={`sidebar-overlay ${isSidebarOpen ? 'active' : ''}`}
-      onClick={toggleSidebar}
-      aria-hidden="true"
-    />
+    {showSidebar && (
+      <div
+        className={`sidebar-overlay ${isSidebarOpen ? 'active' : ''}`}
+        onClick={toggleSidebar}
+        aria-hidden="true"
+      />
+    )}
+  </div>
+);
+
+const NotFound = () => (
+  <div className="not-found">
+    <h2>404 - Page Not Found</h2>
+    <p>The requested page does not exist.</p>
   </div>
 );
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+
+          {/* Only ConsultationForm, no Navbar, no Sidebar */}
+          <Route path="/" element={<ConsultationForm />} />
+
+          {/* Login Page - no layout */}
           <Route path="/login" element={<Login />} />
+
+          {/* Protected Routes with Navbar and Sidebar */}
           <Route
             path="/*"
             element={
@@ -57,8 +70,6 @@ function App() {
                     <Route path="/add-client" element={<AddClient />} />
                     <Route path="/view-client/:id" element={<ViewClient />} />
                     <Route path="/reportPage" element={<ReportPage />} />
-                    <Route path="/consultation" element={<ConsultationForm />} />
-                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </AppLayout>
@@ -70,13 +81,5 @@ function App() {
     </AuthProvider>
   );
 }
-
-// Simple NotFound component for 404 errors
-const NotFound = () => (
-  <div className="not-found">
-    <h2>404 - Page Not Found</h2>
-    <p>The requested page does not exist.</p>
-  </div>
-);
 
 export default App;

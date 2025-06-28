@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen }) => {
           </NavLink>
         </li>
         <li className="sidebar-item">
-          <NavLink to="/consultation" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+          <NavLink to="/" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             <i className="fas fa-file-alt link-icon"></i>
             <span className="link-text">Consultation Form</span>
           </NavLink>
@@ -45,3 +45,4 @@ const Sidebar = ({ isOpen }) => {
 };
 
 export default Sidebar;
+// This component is a sidebar for navigation in a web application.
