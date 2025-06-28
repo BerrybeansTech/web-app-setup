@@ -182,7 +182,7 @@ const Reports = ({ reports = [], onEdit, onDelete, onView }) => {
     
     // Auto-size columns
     const wscols = [
-      {wch: 20}, // Name
+      {wch: 20}, 
       {wch: 5},  // Age
       {wch: 8},  // Gender
       {wch: 12}, // DOB
