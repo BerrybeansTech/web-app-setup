@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ClientForm from '../components/ClientForm';
+import ClientForm from '../components/Clients';
 import * as api from '../services/api';
 // import '../styles/main.css';
 

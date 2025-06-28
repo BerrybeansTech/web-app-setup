@@ -32,18 +32,11 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </button>
-          <NavLink to="/dashboard">
-            <img
-              src={Logo}
-              alt="Eloraa Clinic Logo"
-              className="navbar-logo"
-              draggable="false"
-            />
-          </NavLink>
-          {/* <div className="navbar-title-container">
+      
+          <div className="navbar-title-container">
             <h1 className="navbar-title">Eloraa Clinic</h1>
 
-          </div> */}
+          </div>
         </div>
 
         <div className="navbar-menu">

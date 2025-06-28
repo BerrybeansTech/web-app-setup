@@ -6,7 +6,15 @@ const ReportPage = () => {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    api.getReports().then(setReports);
+    api.getAllConsultations()
+      .then((response) => {
+        console.log('API response:', response.data);
+        setReports(response.data.data || []);
+      })
+      .catch((error) => {
+        console.error('Error fetching consultations:', error);
+        setReports([]);
+      });
   }, []);
 
   return (

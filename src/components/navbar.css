@@ -119,14 +119,14 @@
   line-height: 1.2;
 }
 
-/* .navbar-title {
+.navbar-title {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   margin-top: 10px;
   color: var(--text-color);
   transition: all var(--transition-speed) ease;
-} */
+}
 
 .navbar-subtitle {
   font-size: 0.875rem;
