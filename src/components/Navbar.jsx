@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { ArrowRightOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { NavLink } from 'react-router-dom';
 import './navbar.css';
-import Logo from '../assets/images/logo.png'; // Adjust the path as necessary
+// import Logo from '../assets/images/logo.png'; // Adjust the path as necessary
 
 const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   const { user, logout } = useContext(AuthContext);

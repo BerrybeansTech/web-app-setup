@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
-import { getAllConsultations } from '../services/api'; // Import the API function
+import { getAllConsultations } from '../services/api';
 import './Reports.css';
 
-const Reports = ({ onEdit, onDelete, onView }) => {
+const Reports = () => {
   const [reports, setReports] = useState([]);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -11,28 +12,27 @@ const Reports = ({ onEdit, onDelete, onView }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedRow, setExpandedRow] = useState(null);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchReports();
   }, []);
 
   const fetchReports = async () => {
-  try {
-    setIsLoading(true);
-    setError(null);
-    const response = await getAllConsultations();
-    const data = response.data?.data || [];
-    setReports(data);
-  } catch (err) {
-    console.error('Error fetching reports:', err);
-    setError('Failed to load reports. Please try again later.');
-    setReports([]);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await getAllConsultations();
+      const data = response.data?.data || [];
+      setReports(data);
+    } catch (err) {
+      console.error('Error fetching reports:', err);
+      setError('Failed to load reports. Please try again later.');
+      setReports([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const toggleRowExpand = (id) => {
     setExpandedRow(expandedRow === id ? null : id);
@@ -388,16 +388,15 @@ const Reports = ({ onEdit, onDelete, onView }) => {
               <th className="concerns-column">Main Concerns</th>
               <th className="email-column">Email</th>
               <th className="phone-column">Mobile</th>
-              <th className="status-column">Status</th>
               <th className="actions-column">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredReports.length > 0 ? (
               filteredReports.map((report) => (
-                <React.Fragment key={report._id || report.clientId}>
-                  <tr onClick={() => toggleRowExpand(report._id || report.clientId)} className="main-row">
-                    <td>{report.clientId || '-'}</td>
+                <React.Fragment key={report.id}>
+                  <tr onClick={() => toggleRowExpand(report.id)} className="main-row">
+                    <td>{report.id || '-'}</td>
                     <td>{report.name || '-'}</td>
                     <td>{report.consultingDoctor || '-'}</td>
                     <td>{formatDate(report.date)}</td>
@@ -410,39 +409,19 @@ const Reports = ({ onEdit, onDelete, onView }) => {
                       </span>
                     </td>
                     <td className="actions-cell">
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          onView && onView(report);
-                        }} 
-                        title="View" 
+                          navigate(`/view-client/${report.id}`);
+                        }}
+                        title="View"
                         className="action-button view-button"
                       >
                         <i className="fas fa-eye"></i>
                       </button>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onEdit && onEdit(report);
-                        }} 
-                        title="Edit" 
-                        className="action-button edit-button"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onDelete && onDelete(report._id || report.clientId);
-                        }} 
-                        title="Delete" 
-                        className="action-button delete-button"
-                      >
-                        <i className="fas fa-trash-alt"></i>
-                      </button>
                     </td>
                   </tr>
-                  {expandedRow === (report._id || report.clientId) && (
+                  {expandedRow === report.id && (
                     <tr className="detail-row">
                       <td colSpan="9">
                         <div className="detail-container">

@@ -36,6 +36,15 @@ export const deleteConsultation = (id) => {
     }
   });
 };
+export const getClientById = async (id) => {
+  const response = await axios.get(`${API_BASE_URL}/get-consultation/${id}`);
+  if (response.data.success && response.data.data) {
+    return response.data.data;
+  } else {
+    throw new Error('Client not found');
+  }
+};
+
 
 // Mock login function (replace with actual implementation if needed)
 export const login = async (credentials) => {

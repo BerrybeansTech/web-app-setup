@@ -215,8 +215,8 @@
 }
 
 .reports-table th {
-  background-color: var(--table-header-bg);
-  color: var(--dark-text);
+  color: var(--dark-text) !important;
+  background-color: white !important;
   font-weight: 600;
   padding: 0.75rem 1rem;
   text-align: left;
@@ -226,6 +226,9 @@
 }
 
 .reports-table td {
+  color: var(--dark-text) !important;
+  background-color: white !important;
+  font-weight: normal;
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid var(--table-border);
@@ -245,7 +248,7 @@
 .email-column { min-width: 180px; max-width: 250px; }
 .phone-column { width: 120px; }
 .status-column { width: 100px; }
-.actions-column { width: 120px; }
+.actions-column { width: 60px; }
 
 /* Link Styles */
 .email-link, .phone-link {
@@ -287,12 +290,6 @@
 
 .view-button { background-color: rgba(33, 150, 243, 0.1); color: var(--info-color); }
 .view-button:hover { background-color: rgba(33, 150, 243, 0.2); }
-
-.edit-button { background-color: rgba(255, 152, 0, 0.1); color: var(--warning-color); }
-.edit-button:hover { background-color: rgba(255, 152, 0, 0.2); }
-
-.delete-button { background-color: rgba(244, 67, 54, 0.1); color: var(--danger-color); }
-.delete-button:hover { background-color: rgba(244, 67, 54, 0.2); }
 
 /* Status badges */
 .status-badge {
