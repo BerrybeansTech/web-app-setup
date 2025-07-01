@@ -6,16 +6,34 @@ const ReportPage = () => {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    api.getAllConsultations()
-      .then((response) => {
-        console.log('API response:', response.data);
-        setReports(response.data.data || []);
-      })
-      .catch((error) => {
-        console.error('Error fetching consultations:', error);
-        setReports([]);
-      });
+    fetchAllPages();
   }, []);
+
+  const fetchAllPages = async () => {
+    try {
+      let allData = [];
+      let page = 1;
+      let totalPages = 100;
+
+      do {
+        const response = await api.getAllConsultations(page, 10);
+        const { data, pagination } = response.data;
+
+        if (Array.isArray(data)) {
+          allData = [...allData, ...data];
+        }
+
+        totalPages = pagination?.totalPages || 1;
+        page++;
+      } while (page <= totalPages);
+
+      console.log('All Data:', allData);
+      setReports(allData);
+    } catch (error) {
+      console.error('Error fetching consultations:', error);
+      setReports([]);
+    }
+  };
 
   return (
     <div className="container">

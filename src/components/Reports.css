@@ -288,8 +288,6 @@
   cursor: not-allowed;
 }
 
-.view-button { background-color: rgba(33, 150, 243, 0.1); color: var(--info-color); }
-.view-button:hover { background-color: rgba(33, 150, 243, 0.2); }
 
 /* Status badges */
 .status-badge {

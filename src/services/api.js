@@ -12,13 +12,34 @@ export const submitConsultationForm = (formData) => {
   });
 };
 
-export const getConsultationById = (id) => {
-  return axios.get(`${API_BASE_URL}/get-consultation/${id}`);
+// export const getConsultationById = (id) => {
+//   return axios.get(`${API_BASE_URL}/get-consultation/${id}`);
+// };
+// export const getClientById = async (id) => {
+//   const response = await axios.get(`${API_BASE_URL}/get-consultation/${id}`);
+//   if (response.data.success && response.data.data) {
+//     return response.data.data;
+//   } else {
+//     throw new Error('Client not found');
+//   }
+// };
+export const getConsultationById = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/get-consultation/${id}`);
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    } else {
+      throw new Error('Consultation not found');
+    }
+  } catch (error) {
+    throw error;
+  }
 };
 
-export const getAllConsultations = () => {
-  return axios.get(`${API_BASE_URL}/get-all-consultation`);
+export const getAllConsultations = (page = 1, limit = 100) => {
+  return axios.get(`${API_BASE_URL}/get-all-consultation?page=${page}&limit=${limit}`);
 };
+
 
 export const updateConsultation = (formData) => {
   return axios.put(`${API_BASE_URL}/update-consultation`, formData, {
