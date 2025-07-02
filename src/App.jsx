@@ -4,13 +4,11 @@ import { AuthProvider, AuthContext } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
-import Clients from './pages/Client';
-import AddClient from './pages/AddClient';
 import ViewClient from './pages/ViewClient';
 import ReportPage from './pages/ReportPage';
 import Login from './pages/Login';
 import ConsultationForm from './components/ConsultationForm';
-import './App.css';
+import './index.css';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
@@ -21,7 +19,9 @@ const AppLayout = ({ children, isSidebarOpen, toggleSidebar, showSidebar = true 
   <div className="app">
     <Navbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
     <div className="app-container">
-      {showSidebar && <Sidebar isOpen={isSidebarOpen} />}
+      {showSidebar && (
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      )}
       <main className={`main-content ${isSidebarOpen && showSidebar ? 'sidebar-open' : ''}`}>
         {children}
       </main>
@@ -46,12 +46,12 @@ const NotFound = () => (
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-
           {/* Only ConsultationForm, no Navbar, no Sidebar */}
           <Route path="/" element={<ConsultationForm />} />
 
@@ -63,11 +63,13 @@ function App() {
             path="/*"
             element={
               <ProtectedRoute>
-                <AppLayout isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}>
+                <AppLayout
+                  isSidebarOpen={isSidebarOpen}
+                  toggleSidebar={toggleSidebar}
+                  showSidebar={true}
+                >
                   <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/clients" element={<Clients />} />
-                    <Route path="/add-client" element={<AddClient />} />
                     <Route path="/view-client/:id" element={<ViewClient />} />
                     <Route path="/reportPage" element={<ReportPage />} />
                     <Route path="*" element={<NotFound />} />

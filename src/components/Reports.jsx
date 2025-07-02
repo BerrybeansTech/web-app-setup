@@ -26,9 +26,9 @@ const Reports = () => {
       const data = response.data?.data || [];
       setReports(data);
     } catch (err) {
-      console.error('Error fetching reports:', err);
-      setError('Failed to load reports. Please try again later.');
-      setReports([]);
+  console.error('Error fetching reports:', err?.response?.data || err.message || err);
+  setError('Failed to load reports. Please try again later.');
+  setReports([]);
     } finally {
       setIsLoading(false);
     }
@@ -127,7 +127,7 @@ const Reports = () => {
               <table>
                 <tr><th>Client ID</th><td>${report.id || 'N/A'}</td></tr>
                 <tr><th>Name</th><td>${report.name || 'N/A'}</td></tr>
-                <tr><th>Age</th><td>${report.age || 'N/A'}</td></tr>
+
                 <tr><th>Mobile</th><td>${report.mobile || 'N/A'}</td></tr>
                 <tr><th>Email</th><td>${report.email || 'N/A'}</td></tr>
                 <tr><th>Consultation Date</th><td>${formatDate(report.date)}</td></tr>
@@ -263,13 +263,11 @@ const Reports = () => {
         <table className="reports-table">
           <thead>
             <tr>
+              <th className="client-id-column">No</th>
               <th className="client-id-column">Client ID</th>
               <th className="name-column">Name</th>
-              <th className="doctor-column">Doctor</th>
-              <th className="date-column">Consultation Date</th>
-              <th className="concerns-column">Main Concerns</th>
-              <th className="email-column">Email</th>
-              <th className="phone-column">Mobile</th>
+<th className="date-column">Consultation Date</th>
+<th className="phone-column">Mobile</th>
               <th className="actions-column">Actions</th>
             </tr>
           </thead>
@@ -278,11 +276,12 @@ const Reports = () => {
               filteredReports.map((report) => (
                 <tr key={report.id}>
                   <td>{report.id || '-'}</td>
+                  <td>{report.clientId || '-'}</td>
                   <td>{report.name || '-'}</td>
-                  <td>{report.consultingDoctor || '-'}</td>
+
                   <td>{formatDate(report.date)}</td>
-                  <td>{formatConcerns(report.concerns)}</td>
-                  <td>{report.email || '-'}</td>
+             
+
                   <td>{report.mobile || '-'}</td>
                   <td className="actions-cell">
                     <button

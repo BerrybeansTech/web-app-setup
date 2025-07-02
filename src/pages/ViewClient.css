@@ -82,8 +82,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 3rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-  color: var(--secondary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));  color: var(--secondary-color);
   gap: 1.5rem;
   flex-wrap: wrap;
 }

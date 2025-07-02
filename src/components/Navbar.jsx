@@ -34,7 +34,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           </button>
       
           <div className="navbar-title-container">
-            <h1 className="navbar-title">Eloraa Clinic</h1>
+
 
           </div>
         </div>
