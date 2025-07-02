@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './loginForm.css';
+import { login } from '../services/api'; // Use your real API
 
 const LoginForm = () => {
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ 
     email: '', 
@@ -17,13 +16,12 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    setError(''); // Clear error when user types
+    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!credentials.email || !credentials.password) {
       setError('Please fill in all fields');
       return;
@@ -36,7 +34,7 @@ const LoginForm = () => {
 
     setLoading(true);
     setError('');
-    
+
     try {
       const result = await login(credentials);
       if (result.success) {

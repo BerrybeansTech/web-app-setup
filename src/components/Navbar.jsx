@@ -1,74 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { ArrowRightOnRectangleIcon, UserCircleIcon } from '@heroicons/react/24/outline';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import './navbar.css';
-// import Logo from '../assets/images/logo.png'; // Adjust the path as necessary
 
-const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
-  const { user, logout } = useContext(AuthContext);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        <div className="navbar-logo-container">
-          <button
-            className={`navbar-hamburger ${isSidebarOpen ? 'active' : ''}`}
-            onClick={toggleSidebar}
-            aria-label="Toggle sidebar"
-            aria-expanded={isSidebarOpen}
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </button>
+const Navbar = () => (
+  <nav className="navbar">
+    <div className="navbar-container">
       
-          <div className="navbar-title-container">
-
-
-          </div>
-        </div>
-
-        <div className="navbar-menu">
-          {user && (
-            <div className="navbar-user-section">
-              <div className="navbar-user-info">
-                {user.photoURL ? (
-                  <img
-                    src={user.photoURL}
-                    alt="User avatar"
-                    className="navbar-user-avatar"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <UserCircleIcon className="navbar-user-avatar" />
-                )}
-                <span className="navbar-user-name">{user.displayName || 'Admin'}</span>
-              </div>
-              <button
-                onClick={logout}
-                className="navbar-button"
-                aria-label="Logout"
-              >
-                <ArrowRightOnRectangleIcon />
-                <span>Logout</span>
-              </button>
-            </div>
-          )}
-        </div>
+      {/* Left Side - Logo or Title */}
+      <div className="navbar-left">
+        <h1 className="navbar-title"></h1>
       </div>
-    </nav>
-  );
-};
+
+      {/* Right Side - Admin and Logout */}
+      <div className="navbar-right">
+        <div className="navbar-admin-section">
+          <i className="fas fa-user-circle admin-icon"></i>
+          <span className="admin-text">Admin</span>
+        </div>
+        <button
+          onClick={() => window.location.href = '/login'}
+          className="navbar-button"
+          aria-label="Logout"
+        >
+          <i className="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+);
 
 export default Navbar;

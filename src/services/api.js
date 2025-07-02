@@ -67,9 +67,20 @@ export const getClientById = async (id) => {
 };
 
 
-// Mock login function (replace with actual implementation if needed)
 export const login = async (credentials) => {
+  const { email, password } = credentials;
+
+  // Change these credentials as per your requirement
+  const validEmail = 'admin123@gmail.com';
+  const validPassword = 'admin123';
+
   return new Promise((resolve) => {
-    setTimeout(() => resolve({ token: 'mock-token', user: { name: 'Admin' } }), 500);
+    setTimeout(() => {
+      if (email === validEmail && password === validPassword) {
+        resolve({ success: true, token: 'mock-token', user: { name: 'Admin' } });
+      } else {
+        resolve({ success: false, message: 'Invalid email or password' });
+      }
+    }, 500); // simulate delay
   });
 };
