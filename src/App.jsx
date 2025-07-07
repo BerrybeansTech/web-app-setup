@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import ViewClient from './pages/ViewClient';
 import ReportPage from './pages/ReportPage';
-import Login from './pages/Login';
+import LoginForm from './components/LoginForm'; // adjust path based on your structure
 import ConsultationForm from './components/ConsultationForm';
 import './index.css';
 
@@ -42,33 +42,45 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Only ConsultationForm, no Navbar, no Sidebar */}
-        <Route path="/" element={<ConsultationForm />} />
+        <Route path="/login" element={<LoginForm setIsLoggedIn={setIsLoggedIn} />} />
 
-        {/* Login Page - no layout */}
-        <Route path="/login" element={<Login />} />
+        {isLoggedIn ? (
+          <>
+            {/* ConsultationForm only on /consultation */}
+            <Route path="/consultation" element={<ConsultationForm />} />
 
-        {/* Main App Layout */}
-        <Route
-          path="/*"
-          element={
-            <AppLayout
-              isSidebarOpen={isSidebarOpen}
-              toggleSidebar={toggleSidebar}
-              showSidebar={true}
-            >
-              <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/view-client/:id" element={<ViewClient />} />
-                <Route path="/reportPage" element={<ReportPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </AppLayout>
-          }
-        />
+            {/* Main Layout for other routes */}
+            <Route
+              path="/*"
+              element={
+                <AppLayout
+                  isSidebarOpen={isSidebarOpen}
+                  toggleSidebar={toggleSidebar}
+                  showSidebar={true}
+                >
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/view-client/:id" element={<ViewClient />} />
+                    <Route path="/reportPage" element={<ReportPage />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </AppLayout>
+              }
+            />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        )}
       </Routes>
     </BrowserRouter>
   );

@@ -70,7 +70,6 @@ export const getClientById = async (id) => {
 export const login = async (credentials) => {
   const { email, password } = credentials;
 
-  // Change these credentials as per your requirement
   const validEmail = 'admin123@gmail.com';
   const validPassword = 'admin123';
 
@@ -81,6 +80,7 @@ export const login = async (credentials) => {
       } else {
         resolve({ success: false, message: 'Invalid email or password' });
       }
-    }, 500); // simulate delay
+    }, 500);
   });
 };
+

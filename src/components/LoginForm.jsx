@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './loginForm.css';
-import { login } from '../services/api'; // Use your real API
+import { login } from '../services/api';
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ 
-    email: '', 
-    password: '' 
-  });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +35,8 @@ const LoginForm = () => {
     try {
       const result = await login(credentials);
       if (result.success) {
+        localStorage.setItem('authToken', result.token);
+        setIsLoggedIn(true);
         navigate('/dashboard');
       } else {
         setError(result.message || 'Login failed. Please try again.');
@@ -53,6 +52,7 @@ const LoginForm = () => {
     <div className="login-form-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Admin Login</h2>
+
         <div className="form-group">
           <label htmlFor="email" className="form-label">Email</label>
           <input
@@ -67,6 +67,7 @@ const LoginForm = () => {
             disabled={loading}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="password" className="form-label">Password</label>
           <div className="password-container">
@@ -92,7 +93,9 @@ const LoginForm = () => {
             </button>
           </div>
         </div>
+
         {error && <p className="form-error">{error}</p>}
+
         <button 
           type="submit" 
           className="form-button"

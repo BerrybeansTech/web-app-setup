@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-
 :root {
   --primary-color: #F36886;
   --primary-dark: #d45572;
@@ -117,6 +116,7 @@
   color: var(--dark-text);
 }
 
+
 .search-input:focus {
   outline: none;
   border-color: var(--primary-color);
@@ -183,7 +183,7 @@
 
 .clear-filter-button {
   background-color: var(--background-color);
-  color: var(--dark-text);
+  color:#000; /* Assuming this is what you meant */
   border: 1px solid var(--table-border);
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
@@ -202,7 +202,7 @@
 }
 
 /* Table Styles */
-.table-responsive {
+.table-wrapper {
   width: 100%;
   overflow-x: auto;
   border-radius: var(--border-radius);
@@ -245,62 +245,25 @@
 }
 
 /* Column specific styles */
-.reports-table th.serial-no,
-.reports-table td.serial-no {
-  width: 5%;
-  text-align: center;
-}
-
-.reports-table th.client-id,
-.reports-table td.client-id {
+.client-id-column {
   width: 10%;
 }
 
-.reports-table th.client-name,
-.reports-table td.client-name {
+.name-column {
   width: 25%;
 }
 
-.reports-table th.consultation-date,
-.reports-table td.consultation-date {
+.date-column {
   width: 15%;
 }
 
-.reports-table th.mobile,
-.reports-table td.mobile {
+.phone-column {
   width: 15%;
 }
 
-.reports-table th.actions,
-.reports-table td.actions {
+.actions-column {
   width: 10%;
   text-align: center;
-}
-
-/* Sorting indicators */
-.reports-table th.sortable {
-  cursor: pointer;
-  position: relative;
-  padding-right: 2rem;
-}
-
-.reports-table th.sortable::after {
-  content: '\f0dc'; /* FontAwesome sort icon */
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--light-text);
-}
-
-.reports-table th.sortable.asc::after {
-  content: '\f0de'; /* FontAwesome sort-up icon */
-}
-
-.reports-table th.sortable.desc::after {
-  content: '\f0dd'; /* FontAwesome sort-down icon */
 }
 
 /* Action Buttons */
@@ -323,7 +286,7 @@
 
 .view-button:hover {
   background-color: var(--primary-dark);
-  transform: translate mailsY(-1px);
+  transform: translateY(-1px);
 }
 
 .view-button:disabled {
@@ -367,6 +330,46 @@
   transform: translateY(-1px);
 }
 
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--table-border);
+  background-color: var(--background-color);
+  color: var(--dark-text);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.pagination-button.active {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* No Records Styles */
 .no-records {
   text-align: center;
@@ -398,7 +401,7 @@
   align-items: center;
   gap: 0.75rem;
   color: var(--primary-color);
-  font-size: 1rem;
+  font-size:1rem;
 }
 
 .loading-spinner i {
@@ -546,13 +549,11 @@
     padding: 0.6rem;
   }
   
-  /* Hide non-essential columns on mobile */
-  .reports-table th.client-id,
-  .reports-table td.client-id {
+  .reports-table th.client-id-column,
+  .reports-table td.client-id-column {
     display: none;
   }
   
-  /* Mobile table layout */
   .reports-table thead {
     display: none;
   }
@@ -587,11 +588,11 @@
     text-align: right;
   }
   
-  .reports-table td.actions {
+  .reports-table td.actions-cell {
     justify-content: flex-end;
   }
   
-  .reports-table td.actions > * {
+  .reports-table td.actions-cell > * {
     flex: none;
   }
   
@@ -601,6 +602,15 @@
   
   .no-records {
     padding: 2rem;
+  }
+  
+  .pagination {
+    gap: 0.3rem;
+  }
+  
+  .pagination-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -623,11 +633,11 @@
     border: none;
   }
   
-  .reports-header, .filter-section {
+  .reports-header, .filter-section, .pagination {
     display: none;
   }
   
-  .table-responsive {
+  .table-wrapper {
     overflow: visible;
     border: none;
   }
@@ -650,7 +660,7 @@
     print-color-adjust: exact;
   }
   
-  .reports-table td.actions {
+  .reports-table td.actions-column {
     display: none;
   }
   

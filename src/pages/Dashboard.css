@@ -1,7 +1,315 @@
-h1{
+/* Dashboard.css - Complete Styles with Poppins Font */
 
-  font-size: 2rem;
-  color: #333;
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Base Dashboard Layout */
+.dashboard-container {
+  flex: 1;
+  padding: 1.5rem;
+  transition: margin-left var(--transition-speed);
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.welcome-section h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.welcome-section p {
+  color: var(--form-text-color);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.hospital-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.hospital-icon {
+  font-size: 1.8rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px var(--card-shadow);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  color: var(--card-color);
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-info h3 {
+  font-size: 1rem;
+  color: var(--form-text-color);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 0.25rem;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.stat-change {
+  font-size: 0.85rem;
+  color: var(--form-text-color);
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+/* Main Content Area */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Appointments/Consultations Table */
+.appointments-section {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.appointments-section h2 {
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.appointments-table {
+  overflow-x: auto;
+}
+
+.appointments-table table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.appointments-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: var(--light-bg);
+  color: var(--form-text-color);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.appointments-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--dark-text);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.appointments-table td:first-child {
+  font-family: 'Courier New', monospace; /* Retain monospace for first column */
+  color: var(--form-text-color);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.status-badge.completed,
+.status-badge.confirmed {
+  background-color: rgba(40, 199, 111, 0.1);
+  color: var(--success-color);
+}
+
+.status-badge.scheduled,
+.status-badge.pending {
+  background-color: rgba(255, 159, 67, 0.1);
+  color: var(--warning-color);
+}
+
+.status-badge.cancelled {
+  background-color: rgba(234, 84, 85, 0.1);
+  color: var(--error-color);
+}
+
+/* Quick Actions */
+.quick-actions {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.quick-actions h2 {
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background-color: var(--light-bg);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--primary-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.action-btn:hover {
+  background-color: var(--primary-light);
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.action-btn svg {
+  font-size: 1.5rem;
+}
+
+/* State Indicators */
+.loading, .error, .no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  padding: 1rem;
   text-align: center;
-  margin-top: 20px;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.loading {
+  color: var(--form-text-color);
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.no-data {
+  color: var(--form-text-color);
+  background-color: var(--light-bg);
+  border-radius: var(--border-radius);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .appointments-table {
+    max-width: 100%;
+  }
+  
+  .appointments-table table {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-container {
+    padding: 1rem;
+  }
 }
