@@ -205,7 +205,6 @@ const ViewClient = () => {
             <tr><th>Notes</th><td>${formData.notes || 'N/A'}</td></tr>
             <tr><th>Remarks</th><td>${formData.remarks || 'N/A'}</td></tr>
             <tr><th>Status</th><td>${formData.status || 'N/A'}</td></tr>
-            <tr><th>Consulting Doctor</th><td>${formData.consultingDoctor || 'N/A'}</td></tr>
           </table>
         </div>
       </body>
@@ -224,7 +223,7 @@ const ViewClient = () => {
   const handleDownload = () => {
     const data = [{
       'ID': formData.id || '',
-      'Consulting Doctor': formData.consultingDoctor || '',
+      // 'Consulting Doctor': formData.consultingDoctor || '',
       'Consultation Date': formatDate(formData.date),
       'Client ID': twistStr(formData.clientId) || '',
       'Name': formData.name || '',
@@ -496,7 +495,7 @@ const ViewClient = () => {
                       <EditableRow label="Notes" name="notes" value={formData.notes} editMode={editMode} handleChange={handleChange} />
                       <EditableRow label="Remarks" name="remarks" value={formData.remarks} editMode={editMode} handleChange={handleChange} />
                       <EditableRow label="Status" name="status" value={formData.status} editMode={editMode} handleChange={handleChange} />
-                      <EditableRow label="Consulting Doctor" name="consultingDoctor" value={formData.consultingDoctor} editMode={editMode} handleChange={handleChange} />
+                      {/* <EditableRow label="Consulting Doctor" name="consultingDoctor" value={formData.consultingDoctor} editMode={editMode} handleChange={handleChange} /> */}
                       <EditableRow label="Created At" name="createdAt" value={formatDate(formData.createdAt)} editMode={false} handleChange={handleChange} />
                       <EditableRow label="Updated At" name="updatedAt" value={formatDate(formData.updatedAt)} editMode={false} handleChange={handleChange} />
                     </tbody>

@@ -85,36 +85,7 @@ const Dashboard = ({ isSidebarCollapsed }) => {
         </div>
       </div>
 
-      <div className="stats-grid">
-        <StatCard 
-          icon={<FaUserInjured />} 
-          title="Total Patients" 
-          value={stats.patients} 
-          change={`+${Math.floor(stats.patients * 0.12)} this month`} 
-          color="var(--primary-color)"
-        />
-        <StatCard 
-          icon={<FaCalendarAlt />} 
-          title="Scheduled Appointments" 
-          value={stats.appointments} 
-          change={`+${Math.floor(stats.appointments * 0.15)} new`} 
-          color="#4C6FFF"
-        />
-        <StatCard 
-          icon={<FaProcedures />} 
-          title="Procedures" 
-          value={stats.procedures} 
-          change={`+${Math.floor(stats.procedures * 0.08)} scheduled`} 
-          color="#FF9F43"
-        />
-        <StatCard 
-          icon={<BsGraphUp />} 
-          title="Total Revenue" 
-          value={`$${stats.revenue.toLocaleString()}`} 
-          change={`+${Math.floor(stats.revenue * 0.085 / 1000)}K from last month`} 
-          color="#28C76F"
-        />
-      </div>
+     {/* // */}
 
       <div className="dashboard-content">
         <div className="appointments-section">
