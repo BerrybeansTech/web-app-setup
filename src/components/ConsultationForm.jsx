@@ -1010,13 +1010,16 @@ const ConsultationForm = () => {
 
   // Generate client ID
   useEffect(() => {
+    // Start clientId from 3000 and increment for each new form (simple in-memory counter)
+    let clientIdCounter = 3000;
     const generateClientId = () => {
       const now = new Date();
       const yy = now.getFullYear().toString().slice(-2);
       const mm = String(now.getMonth() + 1).padStart(2, '0');
       const dd = String(now.getDate()).padStart(2, '0');
-      const randomNum = Math.floor(1000 + Math.random() * 9000);
-      return `EC-${yy}${mm}${dd}-${randomNum}`;
+      // Use counter instead of random number
+      const id = clientIdCounter++;
+      return `EC-${yy}${mm}${dd}-${id}`;
     };
     setFormData(prev => ({ ...prev, clientId: generateClientId() }));
   }, []);
